@@ -187,9 +187,9 @@ int main(int argc, char **argv)
     {
       clock_gettime(CLOCK_MONOTONIC_RAW, &t1);
       
-      #pragma omp parallel
+      #pragma omp parallel for
       for (u64 i = 0; i < r; i++) 
-	h = hamming(s1->bases, s2->bases, s1->len);
+	     h = hamming(s1->bases, s2->bases, s1->len);
       
       clock_gettime(CLOCK_MONOTONIC_RAW, &t2);
 
