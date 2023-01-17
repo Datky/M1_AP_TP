@@ -2,7 +2,7 @@ CC=gcc
 
 CFLAGS=-Wall -g
 
-OFLAGS=-march=native -O1 -fopt-info-all=dist.gcc.optrpt
+OFLAGS=-march=native -O1 -fopenmp -fopt-info-all=dist.gcc.optrpt
 
 all: genseq dist
 

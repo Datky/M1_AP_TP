@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <omp.h>
 
 //Defining error codes
 #define ERR_FNAME_NULL   0
@@ -186,6 +187,7 @@ int main(int argc, char **argv)
     {
       clock_gettime(CLOCK_MONOTONIC_RAW, &t1);
       
+      #pragma omp parallel
       for (u64 i = 0; i < r; i++) 
 	h = hamming(s1->bases, s2->bases, s1->len);
       
