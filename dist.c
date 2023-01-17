@@ -147,11 +147,15 @@ u64 hamming(u8 *a, u8 *b, u64 n)
   u64 h = 0;
 
   //
-  for (u64 i = 0; i < n; i += 4) {
+  for (u64 i = 0; i < n; i += 8) {
     h += __builtin_popcount(a[i] ^ b[i]);
     h += __builtin_popcount(a[i+1] ^ b[i+1]);
     h += __builtin_popcount(a[i+2] ^ b[i+2]);
     h += __builtin_popcount(a[i+3] ^ b[i+3]);
+    h += __builtin_popcount(a[i+4] ^ b[i+4]);
+    h += __builtin_popcount(a[i+5] ^ b[i+5]);
+    h += __builtin_popcount(a[i+6] ^ b[i+6]);
+    h += __builtin_popcount(a[i+7] ^ b[i+7]);
   }
 
   //
