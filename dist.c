@@ -87,7 +87,7 @@ seq_t *load_seq(const char *fname)
   s->len = sb.st_size;
 
   //Allocating memory for sequence bases
-  s->bases = malloc(sizeof(u8) * sb.st_size);
+  s->bases = aligned_alloc(sizeof(u8), sizeof(u8) * sb.st_size);
   
   if (!s->bases)
     {
