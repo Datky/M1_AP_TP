@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <omp.h>
 
 //Defining error codes
 #define ERR_FNAME_NULL   0
@@ -87,7 +88,7 @@ seq_t *load_seq(const char *fname)
   s->len = sb.st_size;
 
   //Allocating memory for sequence bases
-  s->bases = malloc(sizeof(u8) * sb.st_size);
+  s->bases = aligned_alloc(sizeof(u8), sizeof(u8) * sb.st_size);
   
   if (!s->bases)
     {
@@ -147,9 +148,12 @@ u64 hamming(u8 *a, u8 *b, u64 n)
   u64 h = 0;
 
   //
-  for (u64 i = 0; i < n; i++)
+  for (u64 i = 0; i < n; i += 4) {
     h += __builtin_popcount(a[i] ^ b[i]);
-
+    h += __builtin_popcount(a[i+1] ^ b[i+1]);
+    h += __builtin_popcount(a[i+2] ^ b[i+2]);
+    h += __builtin_popcount(a[i+3] ^ b[i+3]);
+  }
   //
   return h;
 }
