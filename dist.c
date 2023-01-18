@@ -205,6 +205,7 @@ int main(int argc, char **argv)
     
   printf("hamming distance: %llu\n", h);
   printf("elapsed (ns)    : %.3lf\n", elapsed);
+  printf("Bandwidth (Mib/s): %.3lf\n", ((s1->len)/(1024*1024)) / (elapsed / 1e9));
   
   //
   release_seq(s1); free(s1);
