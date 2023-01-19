@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <nmmintrin.h>
 
 //Defining error codes
 #define ERR_FNAME_NULL   0
@@ -148,7 +149,7 @@ u64 hamming(u8 *a, u8 *b, u64 n)
 
   //
   for (u64 i = 0; i < n; i++)
-    h += __builtin_popcount(a[i] ^ b[i]);
+    h += _mm_popcnt_u64(a[i] ^ b[i]);
 
   //
   return h;
